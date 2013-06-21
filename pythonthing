@@ -1,0 +1,17 @@
+import urllib2
+from bs4 import BeautifulSoup
+import sys
+
+search_url = "http://thepiratebay.sx/search/"
+
+for i in range(len(sys.argv)-1):
+	search_url = search_url + str(sys.argv[i+1]) + "%20"
+
+search_url = search_url + "/0/7/0"
+
+results_page = urllib2.urlopen(search_url)
+
+soup = BeautifulSoup(results_page)
+result_string = soup.find('a', "detLink")
+
+for i in range(len(result_string)):
